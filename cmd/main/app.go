@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/julienschmidt/httprouter"
+
 	"github.com/xyersh/examle-REST-app/internal/user"
 )
 
@@ -17,6 +18,7 @@ func IndexHandler(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 }
 
 func main() {
+
 	log.Println("Create router")
 	router := httprouter.New()
 

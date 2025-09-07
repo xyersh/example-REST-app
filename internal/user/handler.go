@@ -29,31 +29,31 @@ func (h *handler) Register(router *httprouter.Router) {
 }
 
 func (h *handler) GetList(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	w.Write([]byte("This is the users' list"))
 	w.WriteHeader(200)
+	w.Write([]byte("This is the users' list"))
 }
 
 func (h *handler) GetUserByUUID(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	w.Write([]byte("Got user by UUID"))
 	w.WriteHeader(200)
+	w.Write([]byte("Got user by UUID"))
 }
 
 func (h *handler) CreateUser(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	w.Write([]byte("User's creating"))
 	w.WriteHeader(204)
+	w.Write([]byte("User's creating"))
 }
 
 func (h *handler) UpdateUser(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	w.Write([]byte("Full update of the user"))
 	w.WriteHeader(204)
+	w.Write([]byte("Full update of the user"))
 }
 
 func (h *handler) PartialUpdateUser(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	w.Write([]byte("Partial update of the user"))
 	w.WriteHeader(204)
+	w.Write([]byte("Partial update of the user"))
 }
 
 func (h *handler) DeleteUser(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	w.Write([]byte("DElete the user"))
 	w.WriteHeader(204)
+	w.Write([]byte("DElete the user"))
 }
