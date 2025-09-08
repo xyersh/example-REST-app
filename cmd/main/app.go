@@ -1,28 +1,23 @@
 package main
 
 import (
-	"fmt"
-	"log"
+	"log/slog"
 	"net"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/julienschmidt/httprouter"
-
 	"github.com/xyersh/examle-REST-app/internal/user"
+	_ "github.com/xyersh/examle-REST-app/pkg/logging"
 )
 
-func IndexHandler(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	name := p.ByName("name")
-	w.Write([]byte(fmt.Sprintf("Hello, %s", name)))
-}
-
 func main() {
-
-	log.Println("Create router")
+	slog.Info("Create router")
+	// log.Println("Create router")
 	router := httprouter.New()
 
-	log.Println("Register handler")
+	slog.Info("Register custom user handler")
 	handler := user.NewHandler()
 	handler.Register(router)
 
@@ -30,10 +25,11 @@ func main() {
 }
 
 func Start(router *httprouter.Router) {
-	log.Println("Start application")
+	slog.Info("Start application")
 
 	listener, err := net.Listen("tcp", "127.0.0.1:8899")
 	if err != nil {
+		slog.Error("Error during listener creation", "error", err)
 		panic(err)
 	}
 
@@ -43,6 +39,10 @@ func Start(router *httprouter.Router) {
 		ReadTimeout:  15 * time.Second,
 	}
 
-	log.Fatalln(server.Serve(listener))
+	err = server.Serve(listener)
+	if err != nil {
+		slog.Error("Can't serve http", "error", err)
+		os.Exit(1)
+	}
 
 }
