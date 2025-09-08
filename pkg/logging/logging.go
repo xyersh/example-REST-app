@@ -1,14 +1,8 @@
 package logging
 
-// import (
-// 	"fmt"
-// 	"io"
-// 	"os"
-// 	"path"
-// 	"runtime"
+func init() {
 
-// 	"github.com/sirupsen/logrus"
-// )
+}
 
 // type writerHook struct {
 // 	Writer    []io.Writer
