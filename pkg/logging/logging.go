@@ -5,21 +5,33 @@ import (
 	"os"
 )
 
-var logger *slog.Logger
+var (
+	logger       *slog.Logger
+	jsonFileInfo *os.File
+	jsonFileWarn *os.File
+)
 
 func init() {
-	slog.Info("Log initialization starts")
 	// Создаем JSON-обработчик для вывода в файл
-
-	jsonFile, err := os.Create("logs.json")
+	var err error
+	jsonFileInfo, err = os.OpenFile("info_logs.json", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644) //os.Create("info_logs.json")
 	if err != nil {
 		slog.Error("failed to create log file", "error", err)
 		os.Exit(1)
 	}
-	defer jsonFile.Close()
 
-	jsonHandler := slog.NewJSONHandler(jsonFile, &slog.HandlerOptions{
+	jsonFileWarn, err = os.OpenFile("warning_logs.json", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644) //os.Create("warning_logs.json")
+	if err != nil {
+		slog.Error("failed to create log file", "error", err)
+		os.Exit(1)
+	}
+
+	jsonHandlerInfo := slog.NewJSONHandler(jsonFileInfo, &slog.HandlerOptions{
 		Level: slog.LevelInfo,
+	})
+
+	jsonHandlerWarn := slog.NewJSONHandler(jsonFileWarn, &slog.HandlerOptions{
+		Level: slog.LevelWarn,
 	})
 
 	// Создаем текстовый обработчик для вывода в консоль (stdout)
@@ -28,7 +40,7 @@ func init() {
 	})
 
 	// Объединяем обработчики в MultiHandler
-	multiHandler := NewMultiHandler(jsonHandler, textHandler)
+	multiHandler := NewMultiHandler(jsonHandlerInfo, jsonHandlerWarn, textHandler)
 
 	// Создаем логгер, который использует MultiHandler
 	logger = slog.New(multiHandler)
@@ -36,6 +48,5 @@ func init() {
 	// Устанавливаем наш логгер как глобальный, чтобы его могли использовать все функции
 	slog.SetDefault(logger)
 
-	slog.Info("Log initialization ends")
+	slog.Info("Log initialization complete")
 }
-

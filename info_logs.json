@@ -1,0 +1,17 @@
+{"time":"2025-09-09T12:23:36.8757455+03:00","level":"INFO","msg":"Log initialization complete"}
+{"time":"2025-09-09T12:23:36.8892127+03:00","level":"INFO","msg":"Create router"}
+{"time":"2025-09-09T12:23:36.8892127+03:00","level":"WARN","msg":"Test error)))"}
+{"time":"2025-09-09T12:23:36.8892127+03:00","level":"INFO","msg":"Register custom user handler"}
+{"time":"2025-09-09T12:23:36.8892127+03:00","level":"INFO","msg":"Start application"}
+{"time":"2025-09-09T12:23:36.8902123+03:00","level":"ERROR","msg":"Error during listener creation","error":"listen tcp 127.0.0.1:8899: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted."}
+{"time":"2025-09-09T12:26:55.1981109+03:00","level":"INFO","msg":"Log initialization complete"}
+{"time":"2025-09-09T12:26:55.2161071+03:00","level":"INFO","msg":"Create router"}
+{"time":"2025-09-09T12:26:55.2161071+03:00","level":"WARN","msg":"Test error)))"}
+{"time":"2025-09-09T12:26:55.2181041+03:00","level":"INFO","msg":"Register custom user handler"}
+{"time":"2025-09-09T12:26:55.2181041+03:00","level":"INFO","msg":"Start application"}
+{"time":"2025-09-09T13:03:53.0413952+03:00","level":"INFO","msg":"Log initialization complete"}
+{"time":"2025-09-09T13:03:53.0568394+03:00","level":"INFO","msg":"Create router"}
+{"time":"2025-09-09T13:03:53.0568394+03:00","level":"WARN","msg":"Test error)))"}
+{"time":"2025-09-09T13:03:53.0568394+03:00","level":"INFO","msg":"Register custom user handler"}
+{"time":"2025-09-09T13:03:53.0578237+03:00","level":"INFO","msg":"Start application"}
+{"time":"2025-09-09T13:03:53.2563578+03:00","level":"ERROR","msg":"Error during listener creation","error":"listen tcp 127.0.0.1:8899: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted."}
