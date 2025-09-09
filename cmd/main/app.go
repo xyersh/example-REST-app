@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log/slog"
 	"net"
 	"net/http"
@@ -24,6 +25,10 @@ func main() {
 	slog.Info("Register custom user handler")
 	handler := user.NewHandler()
 	handler.Register(router)
+
+	path, _ := filepath.Abs(filepath.Dir(os.Args[0]))
+
+	fmt.Println("test " + path)
 
 	Start(router, cfg)
 }
