@@ -26,28 +26,39 @@ func main() {
 	handler := user.NewHandler()
 	handler.Register(router)
 
-	path, _ := filepath.Abs(filepath.Dir(os.Args[0]))
-
-	fmt.Println("test " + path)
-
 	Start(router, cfg)
 }
 
 func Start(router *httprouter.Router, cfg *config.Config) {
 	slog.Info("Start application")
 
+	var listenErr error
+	var listener net.Listener
+
 	if cfg.Listen.Type == "sock" {
 		// если работаем на сокете
-		filepath.Abs(filepath.Dir(os.Args[0]))
+		appDir, err := filepath.Abs(filepath.Dir(os.Args[0]))
+		if err != nil {
+			slog.Error(err.Error())
+			os.Exit(1)
+		}
+		slog.Info("create socket")
+		socketPath := filepath.Join(appDir, "app.sock")
+
+		slog.Info("listen to unix socket")
+		listener, listenErr = net.Listen("unix", socketPath)
+		slog.Info(fmt.Sprintf("server is listening unix socket %s", socketPath))
+
 	} else {
 		//если работает на порту
-
+		slog.Info("listen to TCP")
+		listener, listenErr = net.Listen("tcp", fmt.Sprintf("%s:%s", cfg.Listen.BindIP, cfg.Listen.Port))
+		slog.Info(fmt.Sprintf("server is listening to TCP on %s:%s", cfg.Listen.BindIP, cfg.Listen.Port))
 	}
 
-	listener, err := net.Listen("tcp", "127.0.0.1:8899")
-	if err != nil {
-		slog.Error("Error during listener creation", "error", err)
-		panic(err)
+	if listenErr != nil {
+		slog.Error("Error during listener creation", "error", listenErr)
+		panic(listenErr)
 	}
 
 	server := &http.Server{
@@ -56,7 +67,7 @@ func Start(router *httprouter.Router, cfg *config.Config) {
 		ReadTimeout:  15 * time.Second,
 	}
 
-	err = server.Serve(listener)
+	err := server.Serve(listener)
 	if err != nil {
 		slog.Error("Can't serve http", "error", err)
 		os.Exit(1)
