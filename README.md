@@ -11,7 +11,7 @@
 ## Сторонние библиотеки
 - [github.com/julienschmidt/httprouter](https://github.com/julienschmidt/httprouter) - http-роутер. Потому что быстрый
 - [github.com/ilyakaznacheev/cleanenv](https://github.com/ilyakaznacheev/cleanenv) - работа с конфинами. Потому чо простой
-
+- [github.com/mongodb/mongo-go-driver](https://github.com/mongodb/mongo-go-driver) - драйвер монги. Потому что официальный
 
 
 
