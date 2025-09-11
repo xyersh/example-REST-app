@@ -2,7 +2,7 @@ package user
 
 type User struct {
 	ID           string `json:"id" bson:"_id,omitempty"`
-	username     string `json:"username" bson:"username"`
+	Username     string `json:"username" bson:"username"`
 	passwordHash string `json:"-" bson:"password"`
 	Email        string `json:"email" bson:"email"`
 }
